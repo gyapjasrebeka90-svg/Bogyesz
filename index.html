@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bogyó 💗</title>
+
+<style>
+
+body {
+    margin: 0;
+    font-family: Arial;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* háttér */
+#background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: 1s;
+    filter: brightness(0.6);
+}
+
+/* középső doboz */
+.container {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: rgba(255,255,255,0.85);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* szöveg */
+h1 {
+    color: #ff4d88;
+}
+
+button {
+
+    font-size: 22px;
+    padding: 15px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 15px;
+}
+
+#igen {
+    background: #66ff99;
+}
+
+#nem {
+    background: #ff9999;
+    position: absolute;
+}
+
+#valasz {
+    font-size: 26px;
+    color: #ff4d88;
+}
+
+/* szívek */
+.heart {
+
+    position: fixed;
+    color: red;
+    font-size: 20px;
+    animation: fall linear;
+}
+
+@keyframes fall {
+
+    from {
+        transform: translateY(-10%);
+    }
+
+    to {
+        transform: translateY(110vh);
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="background"></div>
+
+<div class="container">
+
+<h1>Bogyó 💗</h1>
+
+<h2>Velem töltöd-e a hátra lévő életed?</h2>
+
+<button id="igen" onclick="igen()">Igen</button>
+
+<button id="nem" onmouseover="nem()">Nem</button>
+
+<div id="valasz"></div>
+
+</div>
+
+<script>
+
+/* háttérképek */
+let kepek = [
+
+"kep1.jpg",
+"kep2.jpg",
+"kep3.jpg",
+"kep4.jpg"
+
+]
+
+let index = 0
+
+function hatterValtas(){
+
+document.getElementById("background").style.backgroundImage =
+"url('" + kepek[index] + "')"
+
+index++
+
+if(index >= kepek.length)
+index = 0
+
+}
+
+setInterval(hatterValtas, 3000)
+
+hatterValtas()
+
+/* igen gomb */
+function igen(){
+
+document.getElementById("valasz").innerHTML =
+"Úgysincs más választásod &lt;3 💗"
+
+}
+
+/* nem gomb ugrik */
+function nem(){
+
+let gomb = document.getElementById("nem")
+
+let x = Math.random() * (window.innerWidth - 100)
+let y = Math.random() * (window.innerHeight - 50)
+
+gomb.style.left = x + "px"
+gomb.style.top = y + "px"
+
+}
+
+/* repkedő szívek */
+function sziv(){
+
+let heart = document.createElement("div")
+
+heart.innerHTML = "💗"
+
+heart.className = "heart"
+
+heart.style.left = Math.random()*100 + "vw"
+
+heart.style.animationDuration = (Math.random()*3+2) + "s"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>heart.remove(),5000)
+
+}
+
+setInterval(sziv,300)
+
+</script>
+
+</body>
+</html>
